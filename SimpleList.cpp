@@ -1,6 +1,11 @@
 #include "SimpleList.h"
 
 template<class T>
+void destroy(T element);
+template<class T>
+void destroy(T* element);
+
+template<class T>
 SimpleList<T>::SimpleList()
 {
 	elements = new T[CAPACITY];
@@ -108,13 +113,13 @@ void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListExc
 }
 
 template<class T>
-void SimpleList<T>::destroy(T element)
+void destroy(T element)
 {
 
 }
 
 template<class T>
-void SimpleList<T>::destroy(T* element)
+void destroy(T* element)
 {
 	delete element;
 }
