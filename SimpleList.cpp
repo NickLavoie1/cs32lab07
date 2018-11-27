@@ -2,9 +2,17 @@
 #include <type_traits>
 
 template<class T>
-void destroy(T element);
+void destroy(T element)
+{
+
+}
+
 template<class T>
-void destroy(T* element);
+void destroy(T* element)
+{
+  delete element;
+}
+
 
 template<class T>
 SimpleList<T>::SimpleList()
@@ -18,14 +26,7 @@ SimpleList<T>::~SimpleList()
 {
 	for (int i = 0; i < numElements; i++)
 	{
-	  if(std::is_pointer<T>::value)
-	    {
-		destroy(elements[i]);
-	    }
-	  else
-	    {
-	      destroy(elements[i]);
-	    }
+	  destroy(elements[i]);
 	}
 	delete[] elements;
 	numElements = 0;
@@ -34,14 +35,14 @@ SimpleList<T>::~SimpleList()
 template<class T>
 T SimpleList<T>::at(int index) const throw (InvalidIndexException)
 {
-	if (index > numElements - 1)
+       if (index < 0 || index >= CAPACITY)
 	{
 		throw InvalidIndexException();
 	}
-	else if (index < 0 || index >= CAPACITY)
-	{
-		throw InvalidIndexException();
-	}
+       else if (index >numElements-1)
+	 {
+	   throw InvalidIndexException();
+	 }
 	else
 	{
 		return elements[index];
@@ -107,18 +108,18 @@ void SimpleList<T>::insert(T item) throw (FullListException)
 template<class T>
 void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListException)
 {
-	if (index >= numElements || index < 0)
-	{
-		throw InvalidIndexException();
-	}
-	else if (numElements == 0)
-	{
-		throw EmptyListException();
-	}
+  if(numElements==0)
+	  {
+	    throw EmptyListException();
+	  }
+  else if(index>=numElements || index < 0)
+    {
+      throw InvalidIndexException();
+    }
 	else
 	{
 		destroy(elements[index]);
-		while (index < numElements - 1)
+		while (index < numElements-1)
 		{
 			elements[index] = elements[index + 1];
 			index++;
@@ -127,15 +128,4 @@ void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListExc
 	}
 }
 
-template<class T>
-void destroy(T element)
-{
 
-}
-
-template<class T>
-void destroy(T* element)
-{
-	delete element;
-}
-	
