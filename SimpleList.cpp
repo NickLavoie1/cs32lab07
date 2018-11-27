@@ -47,7 +47,7 @@ bool SimpleList<T>::empty() const
 template<class T>
 T SimpleList<T>::first() const throw(EmptyListException)
 {
-	if (elements.empty())
+	if (numElements==0)
 	{
 		throw EmptyListException();
 	}
@@ -57,7 +57,7 @@ T SimpleList<T>::first() const throw(EmptyListException)
 template<class T>
 T SimpleList<T>::last() const throw (EmptyListException)
 {
-	if (elements.empty())
+	if (numElements==0)
 	{
 		throw EmptyListException();
 	}
