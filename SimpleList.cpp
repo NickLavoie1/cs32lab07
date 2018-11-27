@@ -1,4 +1,5 @@
 #include "SimpleList.h"
+#include <type_traits>
 
 template<class T>
 void destroy(T element);
@@ -11,13 +12,20 @@ SimpleList<T>::SimpleList()
 	elements = new T[CAPACITY];
 	numElements = 0;
 }
-//
+
 template<class T>
 SimpleList<T>::~SimpleList()
 {
-	for (int i = 0; i <= numElements; i++)
+	for (int i = 0; i < numElements; i++)
 	{
+	  if(std::is_pointer<T>::value)
+	    {
 		destroy(elements[i]);
+	    }
+	  else
+	    {
+	      destroy(elements[i]);
+	    }
 	}
 	delete[] elements;
 	numElements = 0;
