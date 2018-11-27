@@ -54,7 +54,8 @@ bool SimpleList<T>::empty() const
 {
 	if (numElements == 0)
 		return true;
-	return false; 
+	else
+	  	return false; 
 }
 
 template<class T>
@@ -64,7 +65,10 @@ T SimpleList<T>::first() const throw(EmptyListException)
 	{
 		throw EmptyListException();
 	}
-	return elements[0];
+	else
+	  {
+	    return elements[0];
+	  }
 }
 
 template<class T>
@@ -74,7 +78,10 @@ T SimpleList<T>::last() const throw (EmptyListException)
 	{
 		throw EmptyListException();
 	}
-	return elements[numElements - 1];
+	else
+	  {
+	    return elements[numElements - 1];
+	  }
 }
 
 template<class T>
@@ -86,15 +93,15 @@ int SimpleList<T>::getNumElements() const
 template<class T>
 void SimpleList<T>::insert(T item) throw (FullListException)
 {
-	if (numElements < CAPACITY)
-	{
-		elements[numElements] = item;
-		numElements++;
-	}
-	else
+	if (numElements == CAPACITY)
 	{
 		throw FullListException();
 	}
+	else
+	  {
+	    elements[numElements] = item;
+	    numElements++;
+	  }
 }
 
 template<class T>
