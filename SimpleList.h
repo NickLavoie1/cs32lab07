@@ -22,8 +22,6 @@ class SimpleList {
 		void insert(T item) throw (FullListException);
 		void remove(int index) throw (InvalidIndexException, EmptyListException);
 		static const int CAPACITY = 10;
-		void destroy(T item);
-		void destroy(T* item);
 	private:
 		int numElements;
 		T* elements;

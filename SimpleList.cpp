@@ -6,7 +6,7 @@ SimpleList<T>::SimpleList()
 	elements = new T[CAPACITY];
 	numElements = 0;
 }
-
+//
 template<class T>
 SimpleList<T>::~SimpleList()
 {
